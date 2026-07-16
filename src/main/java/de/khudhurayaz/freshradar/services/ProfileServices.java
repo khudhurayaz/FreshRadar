@@ -24,6 +24,9 @@ public class ProfileServices {
         return repository.findByUserId(userId)
                 .map(this::toRequest);
     }
+    public Optional<ProfileRequest> findById(int profileId) {
+        return repository.findById(profileId).map(this::toRequest);
+    }
     public Optional<ProfileRequest> findByUserEmail(String userEmail) {
         Optional<User> user = userService.findByEmail(userEmail);
         if (user.isPresent()) {
@@ -100,11 +103,10 @@ public class ProfileServices {
     }
 
     public boolean delete(int id) {
-        return repository.findById(id)
-                .map(profile -> {
-                    repository.delete(profile);
-                    return true;
-                })
-                .orElse(false);
+        if (!repository.existsById(id)) {
+            return false;
+        }
+        repository.deleteById(id);
+        return true;
     }
 }

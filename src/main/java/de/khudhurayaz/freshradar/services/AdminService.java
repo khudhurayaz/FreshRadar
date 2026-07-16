@@ -57,17 +57,23 @@ public class AdminService {
         Optional<Profile> profileOptional =  profileServices.save(request);
         return Optional.of(profileOptional.isPresent());
     }
-
     @Transactional
-    public Optional<Boolean> deleteProfile(ProfileRequest request) {
-        boolean deleteInventory = true;
+    public boolean deleteProfileById(int profileId) {
+        Optional<ProfileRequest> requestOpt = profileServices.findById(profileId);
+        if (requestOpt.isEmpty()) {
+            return false;
+        }
+
+        ProfileRequest request = requestOpt.get();
+
         boolean deleteProduct = true;
 
         Optional<ProductRequest> findProductId = productService.findByUser(request.getUser());
 
         if (findProductId.isPresent()) {
             int productId = findProductId.get().getId();
-            deleteInventory = inventoryService.deleteByProductId(productId);
+
+            inventoryService.deleteByProductId(productId);
             deleteProduct = productService.delete(productId).isPresent();
         }
 
@@ -75,7 +81,10 @@ public class AdminService {
         boolean deleteSubscription = subscriptionService.deleteByUser_Id(request.getUser().getId());
         boolean deleteUser = userService.deleteByEmail(request.getUser().getEmail());
 
-        return Optional.of(deleteInventory && deleteProduct && deleteProfile && deleteSubscription && deleteUser);
+        log.debug("deleteProfileById({}) -> profile={}, subscription={}, user={}, product={}",
+                profileId, deleteProfile, deleteSubscription, deleteUser, deleteProduct);
+
+        return deleteProduct && deleteProfile && deleteSubscription && deleteUser;
     }
 
     public List<ContactRequest> allContacts() {

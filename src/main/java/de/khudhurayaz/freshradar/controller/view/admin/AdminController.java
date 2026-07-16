@@ -114,12 +114,10 @@ public class AdminController {
 
     @DeleteMapping("/profile/{profileId}")
     @ResponseBody
-    public ResponseEntity<ProfileRequest> deleteProfile(
-            @PathVariable int profileId){
-        User user = adminService.findAdminId(profileId);
-        Optional<ProfileRequest> request = adminService.getProfileRequest(user.getEmail());
-        log.debug("request zum löschen {}", request.get());
-        if (adminService.deleteProfile(request.get()).get()) {
+    public ResponseEntity<Void> deleteProfile(@PathVariable int profileId) {
+        boolean deleted = adminService.deleteProfileById(profileId);
+
+        if (deleted) {
             log.debug("Profile erfolgreich gelöscht...");
             return ResponseEntity.ok().build();
         } else {

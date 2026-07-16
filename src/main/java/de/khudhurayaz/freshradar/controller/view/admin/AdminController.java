@@ -92,7 +92,7 @@ public class AdminController {
         model.addAttribute("produktPageSize", finalProductSize);
         model.addAttribute("contactPageSize", finalContactSize);
 
-        return "/admin/admin";
+        return "admin/admin";
     }
 
     @PutMapping("/profile/{profileId}")

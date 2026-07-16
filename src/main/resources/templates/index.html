@@ -19,32 +19,32 @@
 <body>
 
     <!-- Lade Menü -->
-    <div th:replace="~{/site/navigation :: Menu}"></div>
+    <div th:replace="~{site/navigation :: Menu}"></div>
 
     <!-- Lade Hero section -->
-    <div th:replace="~{/site/home :: Hero}" ></div>
+    <div th:replace="~{site/home :: Hero}" ></div>
 
     <!-- Lade Feature section-->
     <div id="features"></div>
-    <div th:replace="~{/site/features :: Features}"></div>
+    <div th:replace="~{site/features :: Features}"></div>
 
     <!-- Lade Preis section -->
     <div id="price"></div>
     <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <div th:replace="~{/site/price :: Price(isSelectionPage=true)}"></div>
+        <div th:replace="~{site/price :: Price(isSelectionPage=true)}"></div>
     </div>
 
     <div th:if="${#authorization.expression('!isAuthenticated()')}">
-        <div th:replace="~{/site/price :: Price(isSelectionPage=false)}"></div>
+        <div th:replace="~{site/price :: Price(isSelectionPage=false)}"></div>
     </div>
 
     <!-- Lade Kontakt section -->
     <div id="contact"></div>
-    <div th:replace="~{/site/contact :: Contact}"></div>
+    <div th:replace="~{site/contact :: Contact}"></div>
 
     <!-- Lade Kontakt section -->
     <div id="footer"></div>
-    <div th:replace="~{/site/footer :: Footer}"></div>
+    <div th:replace="~{site/footer :: Footer}"></div>
 
     <div id="alert"></div>
 

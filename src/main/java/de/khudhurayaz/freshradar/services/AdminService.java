@@ -57,36 +57,55 @@ public class AdminService {
         Optional<Profile> profileOptional =  profileServices.save(request);
         return Optional.of(profileOptional.isPresent());
     }
+
     @Transactional
     public boolean deleteProfileById(int profileId) {
+        log.debug("deleteProfileById start profileId={}", profileId);
+
         Optional<ProfileRequest> requestOpt = profileServices.findById(profileId);
+        log.debug("profileServices.findById done present={}", requestOpt.isPresent());
+
         if (requestOpt.isEmpty()) {
             return false;
         }
 
         ProfileRequest request = requestOpt.get();
+        log.debug("profile loaded userId={}, email={}", request.getUser().getId(), request.getUser().getEmail());
 
+        boolean deleteInventory = true;
         boolean deleteProduct = true;
 
-        Optional<ProductRequest> findProductId = productService.findByUser(request.getUser());
+        log.debug("before productService.findByUser");
+        List<ProductRequest> products = productService.findByUser(request.getUser());
+        log.debug("after productService.findByUser count={}", products.size());
 
-        if (findProductId.isPresent()) {
-            int productId = findProductId.get().getId();
+        for (ProductRequest product : products) {
+            log.debug("deleting productId={}", product.getId());
+            boolean inventoryDeleted = inventoryService.deleteByProductId(product.getId());
+            boolean productDeleted = productService.delete(product.getId()).isPresent();
+            log.debug("productId={} inventoryDeleted={} productDeleted={}", product.getId(), inventoryDeleted, productDeleted);
 
-            inventoryService.deleteByProductId(productId);
-            deleteProduct = productService.delete(productId).isPresent();
+            deleteInventory = deleteInventory && inventoryDeleted;
+            deleteProduct = deleteProduct && productDeleted;
         }
 
+        log.debug("before profile delete");
         boolean deleteProfile = profileServices.delete(request.getId());
+        log.debug("after profile delete={}", deleteProfile);
+
+        log.debug("before subscription delete");
         boolean deleteSubscription = subscriptionService.deleteByUser_Id(request.getUser().getId());
+        log.debug("after subscription delete={}", deleteSubscription);
+
+        log.debug("before user delete");
         boolean deleteUser = userService.deleteByEmail(request.getUser().getEmail());
+        log.debug("after user delete={}", deleteUser);
 
-        log.debug("deleteProfileById({}) -> profile={}, subscription={}, user={}, product={}",
-                profileId, deleteProfile, deleteSubscription, deleteUser, deleteProduct);
+        boolean result = deleteInventory && deleteProduct && deleteProfile && deleteSubscription && deleteUser;
+        log.debug("deleteProfileById result={}", result);
 
-        return deleteProduct && deleteProfile && deleteSubscription && deleteUser;
+        return result;
     }
-
     public List<ContactRequest> allContacts() {
         return contactService.findAll();
     }

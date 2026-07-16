@@ -1,0 +1,52 @@
+/* Kontakt */
+.contact-section {
+    text-align: center;
+    height: 100% !important;
+    background-color: #0C4A6E !important;
+}
+.contact-section h1{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #0EA5E9 !important;
+    padding-top: clamp(2em, 12vw, 5em);
+}
+.contactForm {
+    background-color: #F2F2F2 !important;
+    border-radius: 25px;
+    padding: 2rem;
+    margin: 0 auto;
+    margin-bottom: 1cm;
+    width: 90%;
+    max-width: 800px;
+    text-align: left;
+}
+
+.contact-section h1, .contact-section h1 span {
+    color: #111b1e;
+}
+
+.contact-section p {
+    color: #b6c5c8;
+}
+
+.contactForm form {
+    padding: 0 4rem;
+}
+
+.contactBtn {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    background-color: #0C4A6E !important;
+    color: #ffffff !important;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    border: none;
+    transition: background-color 0.2s;
+    height: 45px;
+}
+
+.contactBtn:hover {
+    background-color: #08334d !important;
+}

@@ -1,0 +1,46 @@
+<section th:fragment="Footer" class="footer-section">
+    <h1 data-animation="animate__fadeInDown" class="text-center">Fresh <span>Radar</span></h1>
+  <div class="footerLogo d-block mx-auto my-3">
+    <img
+         th:src="@{/assets/images/icons/app/FreshRadar2.png}"
+         alt="FreshRadar Logo"
+         data-animation="animate__fadeInUp">
+  </div>
+  <div class="container-fluid d-flex flex-column justify-content-center text-center">
+      <div class="contentFooter">
+        <a th:href="@{/impressum}" data-animation="animate__fadeInLeft">
+          Impressum
+        </a>
+        |
+        <a th:href="@{/privacy_policy}" data-animation="animate__fadeInUp">
+          Datenschutzerklärung
+        </a>
+        |
+        <a th:href="@{/disclaimer}" data-animation="animate__fadeInRight">
+          Haftungsausschluss
+        </a>
+      </div>
+      <div class="socialMedia">
+        <img
+                th:src="@{/assets/images/icons/icons8/features/instagram.png}"
+                alt="Instagram Logo"
+                data-animation="animate__fadeInLeft">
+        <img
+                th:src="@{/assets/images/icons/icons8/features/facebook.png}"
+                alt="Facebook Logo"
+                data-animation="animate__fadeInUp">
+        <img
+                th:src="@{/assets/images/icons/icons8/features/reddit.png}"
+                alt="Reddit Logo"
+                data-animation="animate__fadeInDown">
+        <img
+                th:src="@{/assets/images/icons/icons8/features/github.png}"
+                alt="Github Logo"
+                data-animation="animate__fadeInRight">
+      </div>
+      <hr />
+    <p data-animation="animate__fadeInUp">
+      © FreshRadar. Alle Rechte vorbehalten.
+    </p>
+    </div>
+</section>

@@ -1,0 +1,228 @@
+.logo {
+    position: absolute;
+    top: clamp(15px, 3vw, 25px);
+    left: clamp(15px, 3vw, 25px);
+    width: clamp(100px, 20vw, 328px);
+    height: auto;
+    z-index: 99;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+#fullScreenCarousel {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+}
+
+.slider-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.carousel-caption {
+    z-index: 3 !important;
+    width: clamp(25%, 25vw, 45%) !important;
+    padding-left: clamp(1.5rem, 3vw, 2rem) !important;
+    padding-right: clamp(1.5rem, 3vw, 1.5rem) !important;
+}
+
+.carousel-caption h1 {
+    color: #ffffff !important;
+}
+
+.custom-carousel-btn {
+    width: clamp(35px, 8vw, 50px) !important;
+    height: clamp(35px, 8vw, 50px) !important;
+    position: absolute;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 4 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: none;
+    border: none;
+    padding: 0;
+    opacity: 0.5 !important;
+    transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease;
+}
+
+.custom-carousel-btn img {
+    width: clamp(28px, 6.5vw, 42px);
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: block;
+    z-index: 3;
+}
+
+.custom-carousel-btn:hover {
+    opacity: 1 !important;
+}
+
+.custom-carousel-btn:active,
+.custom-carousel-btn:focus {
+    opacity: 0.5 !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.customBTN {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    background-color: rgba(76, 141, 156, 0.651) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-family: azonix, sans-serif !important;
+    font-size: clamp(1.1rem, 3vw, 1.2rem) !important;
+    padding: clamp(0.5rem, 2vh, 1rem);
+}
+
+.customBTN:hover {
+    color: rgb(255, 255, 255, 1) !important;
+    background-color: rgb(76, 141, 156) !important;
+}
+
+.customBTN2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(76, 141, 156, 0.651) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-family: azonix, sans-serif !important;
+    font-size: clamp(0.5rem, 3vw, 1.1rem) !important;
+    padding: clamp(0.5rem, 2vh, 1rem);
+    margin-top: 20px;
+}
+
+.customBTN2:hover {
+    color: rgb(255, 255, 255, 1) !important;
+    background-color: rgb(76, 141, 156) !important;
+}
+
+.customNavbar {
+    width: 100%;
+    height: clamp(3rem, 6vw, 4.5rem);
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    padding: 0 clamp(1rem, 3vw, 2.5rem);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    z-index: 2000 !important;
+}
+
+.navbar-hidden {
+    transform: translateY(-101%);
+    opacity: 0;
+}
+
+.navbar-scrolled {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    background-color: #EFEFEF !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.customNavbar:has(.show) {
+    background-color: #EFEFEF !important;
+}
+
+.customNavbarLogo {
+    position: absolute;
+    width: clamp(90px, 12vw, 156px);
+    height: auto;
+    top: 50%;
+    left: clamp(1rem, 3vw, 2.5rem);
+    transform: translateY(-50%);
+    z-index: 199;
+}
+
+.customNavbarLogo img {
+    width: 60%;
+    height: auto;
+    display: block;
+    padding: 10px;
+}
+
+.customNavbarCollapse {
+    width: 100%;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-right: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-family: azonix, sans-serif !important;
+    color: #000000 !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link:hover::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 70%;
+    height: 4px;
+    background-color: #4C8D9C;
+}
+
+.loginBTN {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #4C8D9C !important;
+    color: #ffffff !important;
+    font-family: azonix, sans-serif !important;
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 4px !important;
+    white-space: nowrap;
+}
+
+.carousel-item img {
+    z-index: 1;
+}
+
+.slider-overlay {
+    z-index: 2;
+}
+
+.carousel-caption {
+    z-index: 3 !important;
+}
+
+.custom-carousel-btn,
+.carousel-indicators {
+    z-index: 100 !important;
+}

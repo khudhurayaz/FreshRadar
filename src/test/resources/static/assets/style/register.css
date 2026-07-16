@@ -1,0 +1,15 @@
+.passwortRegeln {
+    display: block;
+    margin-top: 10px;
+    padding: 0;
+    width: auto;
+}
+
+.passwortRegeln ul {
+    padding: 0;
+}
+
+.passwortRegeln ul li {
+    font-size: small;
+    font-family: sans-serif;
+}

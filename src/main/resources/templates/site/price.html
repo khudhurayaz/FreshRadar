@@ -1,0 +1,142 @@
+<section class="pricing-section w-100 position-relative overflow-hidden" th:fragment="Price(isSelectionPage)">
+  <h1 data-animation="animate__fadeInDown">Preis</h1>
+  <p class="d-flex flex-column text-center" data-animation="animate__fadeInUp">Finde den passenden Plan für dein Vorratsmanagement</p>
+  <div class="container my-5 py-5">
+    <div class="table-responsive custom-table-container">
+      <table class="table custom-pricing-table align-middle">
+        <thead>
+        <tr>
+          <th data-animation="animate__fadeInLeft" scope="col" class="text-start ps-4 col-feature">Feature</th>
+          <th data-animation="animate__fadeInDown" scope="col" class="text-center col-plan"><span class="badge-basic"></span> BASIC</th>
+          <th data-animation="animate__fadeInRight" scope="col" class="text-center col-plan">
+            <img th:src="@{/assets/images/icons/icons8/features/flash.png}" class="table-flash-img" alt="Pro Icon"> PRO
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-group-header">
+          <td colspan="3" class="text-start ps-4 text-uppercase fw-bold">Gemeinsame Basis-Features</td>
+        </tr>
+        <tr>
+          <td data-animation="animate__fadeInLeft" class="text-start ps-4">
+            <div class="feature-title">Mecker-Dashboard</div>
+            <div class="feature-subtitle">Die zentrale Dashboard für FreshRadar.-</div>
+          </td>
+          <td data-animation="animate__fadeInUp" class="text-center"><img th:src="@{/assets/images/icons/icons8/features/check.png}" class="table-check-img" alt="Check"></td>
+          <td data-animation="animate__fadeInRight" class="text-center"><img th:src="@{/assets/images/icons/icons8/features/check.png}" class="table-check-img" alt="Check"></td>
+        </tr>
+        <tr>
+          <td data-animation="animate__fadeInLeft" class="text-start ps-4">
+            <div class="feature-title">MHD & Geöffnet-Radar</div>
+            <div class="feature-subtitle">Haltbarkeits-Überwachung abgelaufener oder geöffnete Produkte</div>
+          </td>
+          <td data-animation="animate__fadeInUp" class="text-center"><img th:src="@{/assets/images/icons/icons8/features/check.png}" class="table-check-img" alt="Check"></td>
+          <td data-animation="animate__fadeInRight" class="text-center"><img th:src="@{/assets/images/icons/icons8/features/check.png}" class="table-check-img" alt="Check"></td>
+        </tr>
+        <tr>
+          <td data-animation="animate__fadeInLeft" class="text-start ps-4">
+            <div class="feature-title">Manuelle Schnelleingabe</div>
+            <div class="feature-subtitle">Produkte und Haltbarkeitsdaten unkompliziert im Browser erfassen</div>
+          </td>
+          <td data-animation="animate__fadeInUp" class="text-center"><img th:src="@{/assets/images/icons/icons8/features/check.png}" class="table-check-img" alt="Check"></td>
+          <td data-animation="animate__fadeInRight" class="text-center"><img th:src="@{/assets/images/icons/icons8/features/check.png}" class="table-check-img" alt="Check"></td>
+        </tr>
+
+        <tr class="table-group-header">
+          <td colspan="3" class="text-start ps-4 text-uppercase fw-bold">Exklusive Pro-Vorteile & Limits</td>
+        </tr>
+        <tr>
+          <td data-animation="animate__fadeInLeft" class="text-start ps-4">
+            <div class="feature-title">Produktlimits</div>
+            <div class="feature-subtitle">Anzahl der Produkte, die du gleichzeitig in Dashboard erfassen und überwachen kannst.</div>
+          </td>
+          <td data-animation="animate__fadeInUp" class="text-center"><span class="pill-gray">Max. 10 Produkte</span></td>
+          <td data-animation="animate__fadeInRight" class="text-center"><span class="pill-teal">Unbegrenzt</span></td>
+        </tr>
+        <tr>
+          <td data-animation="animate__fadeInLeft" class="text-start ps-4">
+            <div class="feature-title">Automatischer Versorgungs-Abgleich</div>
+            <div class="feature-subtitle">Soll-Bestand, Ist-Bestand und akutem Bedarf.</div>
+          </td>
+          <td data-animation="animate__fadeInUp" class="text-center"><img th:src="@{/assets/images/icons/icons8/features/wrong.png}" class="table-cross-img" alt="wrong"></td>
+          <td data-animation="animate__fadeInRight" class="text-center"><img th:src="@{/assets/images/icons/icons8/features/check.png}" class="table-check-img" alt="Check"></td>
+        </tr>
+        <!--
+        <tr>
+          <td data-animation="animate__fadeInLeft" class="text-start ps-4">
+            <div class="feature-title">Historie</div>
+            <div class="feature-subtitle">Wie lange deine Statistiken und Log-Daten gespeichert bleiben.</div>
+          </td>
+          <td data-animation="animate__fadeInUp" class="text-center text-dark-bold">7 Tage</td>
+          <td data-animation="animate__fadeInRight" class="text-center text-teal-bold">365 Tage</td>
+        </tr>
+
+        <tr>
+          <td data-animation="animate__fadeInLeft" class="text-start ps-4">
+            <div class="feature-title">Daten-Export</div>
+            <div class="feature-subtitle">Exportiere deine Daten</div>
+          </td>
+          <td data-animation="animate__fadeInUp" class="text-center text-italic-gray">Nicht verfügbar</td>
+          <td data-animation="animate__fadeInRight" class="text-center">
+            <div class="d-flex align-items-center justify-content-center gap-1">
+              <img th:src="@{/assets/images/icons/icons8/features/check.png}" class="table-check-img" alt="Check">
+              <span class="text-small-sub">(CSV & PDF)</span>
+            </div>
+          </td>
+        </tr>
+        -->
+        <tr>
+          <td data-animation="animate__fadeInLeft" class="text-start ps-4">
+            <div class="feature-title">Support-Level</div>
+            <div class="feature-subtitle">Deine Absicherung bei Fragen oder technischen Anliegen.</div>
+          </td>
+          <td data-animation="animate__fadeInUp" class="text-center text-plain">Support via E-Mail</td>
+          <td data-animation="animate__fadeInRight" class="text-center">
+            <div class="d-flex align-items-center justify-content-center gap-2">
+              <img th:src="@{/assets/images/icons/icons8/features/rocket.png}" class="table-rocket-img" alt="Rocket">
+              <span class="text-blue-bold">24/7 Premium Support</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td data-animation="animate__fadeInLeft" class="text-start ps-4">
+            <div class="feature-title">
+              Preis
+            </div>
+            <div class="feature-subtitle">
+              Für kleine Geldbeutel...
+            </div>
+          </td>
+          <td data-animation="animate__fadeInUp" class="text-center text-plain">4,99 €</td>
+          <td data-animation="animate__fadeInRight" class="text-center">
+            <div class="d-flex align-items-center justify-content-center gap-2">
+              <span class="text-blue-bold">9,99 €</span>
+            </div>
+          </td>
+        </tr>
+
+        <tr class="action-row">
+          <td></td>
+          <td data-animation="animate__fadeInLeft" class="text-center">
+            <a th:if="${!isSelectionPage}" th:href="@{/register}" class="btn table-btn-select" role="button">Jetzt auswählen</a>
+            <form th:if="${isSelectionPage}" th:action="@{/subscribe}" method="post">
+              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+              <input type="hidden" name="planType" value="basic">
+              <button type="submit" class="btn table-btn-select">Wählen</button>
+            </form>
+          </td>
+          <td data-animation="animate__fadeInRight" class="text-center">
+            <a th:if="${!isSelectionPage}" th:href="@{/register}" class="btn table-btn-buy" role="button">Jetzt kaufen</a>
+            <form th:if="${isSelectionPage}" th:action="@{/subscribe}" method="post">
+              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+              <input type="hidden" name="planType" value="pro">
+              <button type="submit" class="btn table-btn-buy">Pro Aktivieren</button>
+            </form>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

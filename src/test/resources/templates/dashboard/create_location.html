@@ -1,0 +1,14 @@
+<section th:fragment="createLocation" class="createLocation">
+    <div class="mb-4">
+        <h1>Neuen Lagerort erstellen</h1>
+    </div>
+    <form class="row g-3" id="createLocationForm">
+        <div class="col-12">
+            <label for="inputLocation" class="form-label">Name</label>
+            <input type="text" class="form-control" id="inputLocation" placeholder="Wie heißt ihr neues Lagerort?" required>
+        </div>
+        <div class="col-12">
+            <button type="submit" id="submit" class="btn btn-secondary w-100 btnAddNewProduct">Lagerort hinzufügen</button>
+        </div>
+    </form>
+</section>

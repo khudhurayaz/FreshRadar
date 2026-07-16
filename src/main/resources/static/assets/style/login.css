@@ -1,0 +1,60 @@
+/* LOGIN SEITEN STIL */
+.login-page {
+    background: #0F172A !important;
+    padding: 0 !important;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.login-card {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    color: #fff;
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card h1 {
+    font-size: clamp(1.25rem, 2.5vw + 0.5rem, 2rem);
+}
+
+.login-card h1 span {
+    color: #0d4b6e !important;
+}
+
+.btn-custom {
+    background-color: #0d4b6e !important;
+    color: #F2F2F2 !important;
+}
+
+.text-link {
+    color: #00b9c7 !important;
+}
+
+/* menu */
+body.static-nav-page .navbar-nav .nav-link.active {
+    color: inherit !important;
+    border-bottom: none !important;
+}
+
+body.static-nav-page .navbar-nav .nav-link.active::after {
+    display: none !important;
+}
+
+.logo-img {
+    max-width: clamp(200px, 50vw, 800px);
+    width: 100%;
+    height: auto;
+}
+
+.user-icon {
+    position: absolute;
+    bottom: 20%;
+    right: 50%;
+    max-width: clamp(20px, 8vw, 40px);
+    width: 100%;
+    height: auto;
+}

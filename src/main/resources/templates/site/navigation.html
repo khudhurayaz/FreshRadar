@@ -1,0 +1,39 @@
+
+<nav class="navbar navbar-expand-lg customNavbar fixed-top navbar-hidden" th:fragment="Menu"
+     th:classappend="${extraClass}" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <a class="navbar-brand customNavbarLogo" href="/">
+    <img th:src="@{/assets/images/icons/app/FreshRadar.png}" alt="FreshRadar">
+  </a>
+
+  <div class="container-fluid d-flex justify-content-end align-items-center position-static">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse customNavbarCollapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/#features}">FEATURES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/#price}">PREISE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/#contact}">KONTAKT</a>
+        </li>
+      </ul>
+      <div sec:authorize="isAuthenticated()">
+        <a class="btn loginBTN"
+           th:href="${aboPausiert == false && aboBeendet == false} ? '/dashboard' : '/profile'"
+           th:text="${aboPausiert == false && aboBeendet == false} ? 'DASHBOARD' : 'PROFILE'">
+        </a>
+      </div>
+
+      <div sec:authorize="!isAuthenticated()">
+        <a href="/login" class="btn loginBTN" role="button">EINLOGGEN</a>
+      </div>
+    </div>
+  </div>
+</nav>

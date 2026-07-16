@@ -1,0 +1,276 @@
+<div class="table-responsive showProducts" th:fragment="ShowProducts">
+    <h3 class="card-title mb-4">Produkte</h3>
+
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Produkt</th>
+            <th scope="col">User / Ort / Kategorie</th>
+            <th scope="col">Soll / Ist</th>
+            <th scope="col">Status</th>
+            <th scope="col">Daten</th>
+            <th scope="col">Aktion</th>
+        </tr>
+        </thead>
+
+        <tbody th:if="${productPage != null and !productPage.isEmpty()}">
+        <tr th:each="product : ${productPage.content}"
+            th:attr="data-product-id=${product.id}">
+            <td class="text-muted" th:text="${product.id}"></td>
+
+            <td>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle border shadow-sm d-flex align-items-center justify-content-center bg-light text-dark fw-semibold"
+                         style="width:56px;height:56px;">
+                        <span th:text="${product.name != null and !#strings.isEmpty(product.name) ? #strings.substring(product.name,0,1) : 'P'}"></span>
+                    </div>
+
+                    <div class="w-100">
+                        <div class="view-mode">
+                            <div class="fw-semibold text-dark product-name"
+                                 th:text="${product.name ?: 'Unbekanntes Produkt'}"></div>
+                            <small class="text-muted product-unit"
+                                   th:text="${product.unit ?: ''}"></small>
+                        </div>
+
+                        <div class="edit-mode d-none">
+                            <div class="row g-2">
+                                <div class="col-12">
+                                    <input type="text"
+                                           class="form-control form-control-sm edit-product-name"
+                                           placeholder="Produktname"
+                                           th:value="${product.name ?: ''}">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text"
+                                           class="form-control form-control-sm edit-unit"
+                                           placeholder="Einheit"
+                                           th:value="${product.unit ?: ''}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="view-mode">
+                    <div class="text-dark">
+                        User ID: <span class="product-user-id" th:text="${product.userId ?: ''}"></span>
+                    </div>
+                    <small class="text-muted d-block">
+                        Location ID: <span class="product-location-id" th:text="${product.locationId ?: ''}"></span>
+                    </small>
+                    <small class="text-muted d-block">
+                        Category ID: <span class="product-category-id" th:text="${product.categoryId ?: ''}"></span>
+                    </small>
+                </div>
+
+                <div class="edit-mode d-none">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <label for="inputStateUser" class="form-label">User</label>
+                            <select id="inputStateUser"
+                                    class="form-select form-select-sm edit-user-id"
+                                    name="userId">
+                                <option value="">Bitte User auswählen...</option>
+
+                                <option th:each="user : ${allUsers}"
+                                        th:value="${user.id}"
+                                        th:text="${user.email}"
+                                        th:selected="${product.userId != null and product.userId == user.id}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="inputStateLocation" class="form-label">Lagerort</label>
+                            <select id="inputStateLocation"
+                                    class="form-select form-select-sm edit-location-id"
+                                    name="locationId">
+                                <option value="">Bitte Lager auswählen...</option>
+
+                                <option th:each="location : ${allLocations}"
+                                        th:value="${location.id}"
+                                        th:text="${location.location}"
+                                        th:selected="${product.locationId != null && product.locationId == location.id}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="inputStateCategory" class="form-label">Kategorie</label>
+                            <select id="inputStateCategory"
+                                    class="form-select form-select-sm edit-category-id"
+                                    name="categoryId">
+                                <option value="">Bitte Kategorie auswählen...</option>
+
+                                <option th:each="category : ${allCategories}"
+                                        th:value="${category.id}"
+                                        th:text="${category.name}"
+                                        th:selected="${product.categoryId != null && product.categoryId == category.id}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="view-mode">
+                    <div class="text-dark">
+                        Soll: <span class="product-sollte" th:text="${product.soll ?: ''}"></span>
+                    </div>
+                    <small class="text-muted d-block">
+                        Ist: <span class="product-ist" th:text="${product.ist ?: ''}"></span>
+                    </small>
+                </div>
+                <div class="edit-mode d-none">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <input type="number"
+                                   class="form-control form-control-sm edit-soll"
+                                   placeholder="Soll"
+                                   th:value="${product.soll ?: ''}">
+                        </div>
+                        <div class="col-12">
+                            <input type="number"
+                                   class="form-control form-control-sm edit-ist"
+                                   placeholder="Ist"
+                                   th:value="${product.ist ?: ''}">
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="view-mode">
+                    <span class="badge product-is-open"
+                          th:classappend="${product.isOpen != null and product.isOpen} ? ' bg-success' : ' bg-secondary'"
+                          th:text="${product.isOpen != null ? (product.isOpen ? 'Geöffnet' : 'Geschlossen') : 'Unbekannt'}"></span>
+                </div>
+
+                <div class="edit-mode d-none">
+                    <select class="form-select form-select-sm edit-is-open">
+                        <option value="true" th:selected="${product.isOpen != null and product.isOpen}">Geöffnet</option>
+                        <option value="false" th:selected="${product.isOpen != null and !product.isOpen}">Geschlossen</option>
+                    </select>
+                </div>
+            </td>
+
+            <td>
+                <div class="view-mode">
+                    <div class="text-dark">
+                        Ablaufdatum:
+                        <span class="product-expiry-date" th:text="${product.expiryDate ?: ''}"></span>
+                    </div>
+                    <small class="text-muted d-block">
+                        Hinzugefügt:
+                        <span class="product-added-at" th:text="${product.addedAt ?: ''}"></span>
+                    </small>
+                </div>
+
+                <div class="edit-mode d-none">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <input type="datetime-local"
+                                   class="form-control form-control-sm edit-expiry-date"
+                                   th:value="${product.expiryDate ?: ''}">
+                        </div>
+                        <div class="col-12">
+                            <input type="datetime-local"
+                                   class="form-control form-control-sm edit-added-at"
+                                   th:value="${product.addedAt ?: ''}">
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="d-flex flex-wrap gap-2">
+                    <button type="button" class="btn btn-info btn-sm btn-edit-toggle-product">
+                        Ändern
+                    </button>
+
+                    <button type="button" class="btn btn-success btn-sm d-none btn-save-product">
+                        Speichern
+                    </button>
+
+                    <button type="button" class="btn btn-secondary btn-sm d-none btn-cancel-product">
+                        Abbrechen
+                    </button>
+
+                    <button type="button"
+                            class="btn btn-danger btn-sm btn-delete-product"
+                            th:attr="data-product-id=${product.id},
+                                     data-product-name=${product.name ?: 'Unbekannt'}">
+                        Löschen
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+
+        <tbody th:if="${productPage == null or productPage.isEmpty()}">
+        <tr>
+            <td colspan="6" class="text-center text-muted py-4">
+                Es sind aktuell keine Produkte vorhanden.
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav class="my-3"
+         aria-label="Produkte Seiten"
+         th:if="${productPage != null and productPage.totalPages > 1}">
+        <ul class="pagination justify-content-center mb-0">
+
+            <li class="page-item" th:classappend="${productPage.first} ? ' disabled'">
+                <a class="page-link"
+                   th:if="${!productPage.first}"
+                   th:href="@{/admin(produktPage=${productPage.number - 1},
+                                produktPageSize=${productPage.size},
+                                profilePage=${profilePage.number},
+                                profilePageSize=${profilePage.size},
+                                contactPage=${contactPage.number},
+                                contactPageSize=${contactPage.size})}">
+                    Zurück
+                </a>
+                <span class="page-link" th:if="${productPage.first}">Zurück</span>
+            </li>
+
+            <li class="page-item"
+                th:each="i : ${#numbers.sequence(0, productPage.totalPages - 1)}"
+                th:classappend="${i == productPage.number} ? ' active'">
+                <a class="page-link"
+                   th:if="${i != productPage.number}"
+                   th:href="@{/admin(produktPage=${i},
+                                produktPageSize=${productPage.size},
+                                profilePage=${profilePage.number},
+                                profilePageSize=${profilePage.size},
+                                contactPage=${contactPage.number},
+                                contactPageSize=${contactPage.size})}"
+                   th:text="${i + 1}"></a>
+                <span class="page-link"
+                      th:if="${i == productPage.number}"
+                      th:text="${i + 1}"></span>
+            </li>
+
+            <li class="page-item" th:classappend="${productPage.last} ? ' disabled'">
+                <a class="page-link"
+                   th:if="${!productPage.last}"
+                   th:href="@{/admin(produktPage=${productPage.number + 1},
+                                produktPageSize=${productPage.size},
+                                profilePage=${profilePage.number},
+                                profilePageSize=${profilePage.size},
+                                contactPage=${contactPage.number},
+                                contactPageSize=${contactPage.size})}">
+                    Weiter
+                </a>
+                <span class="page-link" th:if="${productPage.last}">Weiter</span>
+            </li>
+
+        </ul>
+    </nav>
+</div>

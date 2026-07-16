@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta th:name="${author}" th:content="${authorDescription}">
+    <title th:text="${appName + ' | DASHBOARD'}"></title>
+    <link th:href="${cssPath}" rel="stylesheet">
+    <link th:href="${mobilePath}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="${appIcon}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<section class="container-fluid dashboard">
+    <div class="row align-items-center">
+        <div class="col-12 d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex flex-column align-items-start">
+                <h1 class="mb-0">DASHBOARD</h1>
+                <a th:href="@{/}" class="text-decoration-none mt-2" title="Zur Startseite">
+                    <img src="/assets/images/icons/icons8/home.png" alt="Home" width="32" height="32">
+                </a>
+            </div>
+            <div class="row d-flex m-4 justify-content-center">
+                <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                    <div class="col-12">
+                        <div class="dropdown">
+                            <button class="btn border-0 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="roundImage" th:src="@{${profileImage != null ?  profileImage : '/assets/images/profile/default/defaultProfile.png'}}"
+                                     th:alt="${'Profil von ' + userEmail}">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
+                                <li th:if="${role == 'ROLE_admin'}">
+                                    <a class="dropdown-item" th:href="@{/admin}">Admin</a>
+                                </li>
+                                <li><a class="dropdown-item" th:href="@{/setting}">Einstellungen</a></li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post" class="m-0">
+                                        <button type="submit" class="dropdown-item w-100 text-start bg-transparent border-0">
+                                            Abmelden
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+
+        <div class="row w-100 mx-auto my-5">
+            <div class="col-12 col-md-4 mb-5">
+                <div class="d-flex flex-column gap-2">
+                    <h1 class="mb-3">SUBMENU</h1>
+                    <a th:href="@{/dashboard}" class="btn btn-custom w-100 text-start">Dashboard</a>
+                    <a th:href="@{/dashboard(tab='haltbarkeit')}" class="btn btn-custom w-100 text-start">Haltbarkeitsüberwachung</a>
+                    <a th:href="@{/dashboard(tab='bestandsverwaltung')}" class="btn btn-custom w-100 text-start">Bestandsverwaltung</a>
+                    <a th:if="${!isBasic}"
+                       th:href="@{/dashboard(tab='soll_ist')}"
+                       class="btn btn-custom w-100 text-start">
+                        Soll-Ist-Bedarf
+                    </a>
+                    <hr>
+                    <h3>Erstellen</h3>
+                    <a th:href="@{/dashboard(tab='create')}"
+                       class="btn btn-custom w-100 d-flex align-items-center justify-content-between">
+                        <span>Neues Produkt hinzufügen</span>
+                        <img src="/assets/images/icons/icons8/add.png" alt="add" width="32" height="32">
+                    </a>
+                    <a th:href="@{/dashboard(tab='createCategory')}"
+                       class="btn btn-custom w-100 d-flex align-items-center justify-content-between">
+                        <span>Neue Kategorie erstellen</span>
+                        <img src="/assets/images/icons/icons8/add.png" alt="add" width="32" height="32">
+                    </a>
+                    <a th:href="@{/dashboard(tab='createLocation')}"
+                       class="btn btn-custom w-100 d-flex align-items-center justify-content-between">
+                        <span>Neuen Lagerort erstellen</span>
+                        <img src="/assets/images/icons/icons8/add.png" alt="add" width="32" height="32">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8">
+                <div class="text-white p-3 h-100">
+                    <th:block th:switch="${activeTab}">
+                        <th:block th:case="'haltbarkeit'">
+                            <div th:replace="~{dashboard/haltbarkeit_ueberwachung :: Haltbarkeit}"></div>
+                        </th:block>
+                        <th:block th:case="'bestandsverwaltung'">
+                            <div th:replace="~{dashboard/bestandsverwaltung :: Bestandsverwaltung}"></div>
+                        </th:block>
+                        <th:block th:if="${!isBasic}" th:case="'soll_ist'">
+                            <div th:replace="~{dashboard/soll_ist :: SollIst}"></div>
+                        </th:block>
+                        <th:block th:case="'create'">
+                            <div th:replace="~{dashboard/create_product :: create}"></div>
+                        </th:block>
+                        <th:block th:case="'createCategory'">
+                            <div th:replace="~{dashboard/create_category :: createCategory}"></div>
+                        </th:block>
+                        <th:block th:case="'createLocation'">
+                            <div th:replace="~{dashboard/create_location :: createLocation}"></div>
+                        </th:block>
+
+                        <th:block th:case="*">
+                            <div class="dashboardBox dashboardHero mb-4">
+                                <div class="row g-4 align-items-center">
+                                    <div class="col-12 col-xl-7">
+                                        <div class="dashboardHeroText">
+                                            <h2 class="mb-3">Willkommen im Dashboard</h2>
+                                            <p>
+                                                Verwalte hier deine Bestände, überwache Haltbarkeiten und lege neue Produkte,
+                                                Kategorien oder Lagerorte an.
+                                            </p>
+                                        </div>
+
+                                        <div class="row g-3 statusCards">
+                                            <div class="col-12 col-sm-6 col-xl-4">
+                                                <div class="statusCard">
+                                                    <div class="statusLabel">Bereiche</div>
+                                                    <p class="statusValue" th:text="${isBasic} ? '2 Module' : '3 Module'">3 Module</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-xl-4">
+                                                <div class="statusCard">
+                                                    <div class="statusLabel">Zugriff</div>
+                                                    <p class="statusValue">Aktiv</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-xl-4">
+                                                <div class="statusCard">
+                                                    <div class="statusLabel">Status</div>
+                                                    <p class="statusValue">Bereit</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-xl-4">
+                                                <div class="statusCard">
+                                                    <div class="statusLabel">Abo</div>
+                                                    <p class="statusValue"  th:if="${isBasic}">Du hast Basic Abo</p>
+                                                    <p class="statusValue"  th:unless="${isBasic}">Du hast Pro Abo</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-xl-5">
+                                        <div class="logoPanel">
+                                            <div class="dashboardFreshRadarLogo">
+                                                <img src="/assets/images/icons/app/FreshRadar2.png" alt="FreshRadar Logo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-12 col-lg-5">
+                                    <div class="ampelPanel">
+                                        <div class="ampelPanelHeader">
+                                            <div>
+                                                <h3>Ampelstatus</h3>
+                                                <p>Zeigt die aktuelle Übersicht deiner Warnstufen.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="ampelList">
+                                            <div class="ampelItem">
+                                                <div id="ampelSignal" class="ampel productsCount"></div>
+                                                <span class="ampelText" id="productsExpire">Abgelaufene Produkte</span>
+                                            </div>
+
+                                            <div class="ampelItem">
+                                                <div id="ampelSignal1" class="ampel productsCount"></div>
+                                                <span class="ampelText " id="productsToExpireText">Produkte laufen bald ab</span>
+                                            </div>
+
+                                            <div class="ampelItem">
+                                                <div id="ampelSignal2" class="ampel"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-lg-7">
+                                    <div class="row g-3 h-100">
+                                        <div class="col-12 col-md-6">
+                                            <div class="featureCard">
+                                                <h3>Haltbarkeit prüfen</h3>
+                                                <p>Behalte Produkte mit kritischen oder bald ablaufenden Daten schneller im Blick.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="featureCard">
+                                                <h3>Bestände verwalten</h3>
+                                                <p>Pflege Standorte und Produktdaten zentral an einem Ort.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="featureCard">
+                                                <h3>Schnell starten</h3>
+                                                <p>Nutze das Menü links, um direkt neue Produkte, Kategorien oder Lagerorte zu erstellen.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="featureCard">
+                                                <h3>Soll-Ist-Bedarf</h3>
+                                                <p>Pflege Mengen.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="featureCard">
+                                                <h3>Erstellen</h3>
+                                                <p>Füge neue Produkte, Kategorien oder Lagerorts hinzu!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="alert"></div>
+</section>
+
+<script th:src="${jsPath}"></script>
+<script type="module" th:src="${jsDashboardPath}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

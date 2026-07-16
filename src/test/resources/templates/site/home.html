@@ -1,0 +1,68 @@
+<section class="vw-100 vh-100 min-vh-100 position-relative overflow-hidden" th:fragment="Hero">
+
+    <div id="fullScreenCarousel" class="carousel slide h-100 w-100" data-bs-ride="carousel" data-bs-interval="6000">
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#fullScreenCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#fullScreenCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#fullScreenCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#fullScreenCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#fullScreenCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        </div>
+
+        <div class="carousel-inner h-100 w-100">
+            <div class="carousel-item active h-100 w-100">
+                <img th:src="@{/assets/images/app/dashboard.png}" class="d-block w-100 h-100 object-fit-cover" alt="Slide 1">
+                <div class="slider-overlay"></div>
+                <div class="carousel-caption d-flex flex-column align-items-start text-start start-0 ps-5 ms-4 bottom-5 mb-5 pb-2">
+                    <h1>Mecker Dashboard</h1>
+                    <p>Das ist der Startbildschirm der GUI nach dem der Benutzer sich registriert oder eingeloggt hat.</p>
+                </div>
+            </div>
+
+            <div class="carousel-item h-100 w-100">
+                <img th:src="@{/assets/images/app/Bestandsverwaltung.png}" class="d-block w-100 h-100 object-fit-cover" alt="Slide 2">
+                <div class="slider-overlay"></div>
+                <div class="carousel-caption d-flex flex-column align-items-start text-start start-0 ps-5 ms-4 bottom-5 mb-5 pb-2">
+                    <h1>Bestandsverwaltung</h1>
+                    <p>Behalten Sie den Überblick über Ihren Bestand.</p>
+                </div>
+            </div>
+
+            <div class="carousel-item h-100 w-100">
+                <img th:src="@{/assets/images/app/HaltbarkeitUeberwachung.png}" class="d-block w-100 h-100 object-fit-cover" alt="Slide 3">
+                <div class="slider-overlay"></div>
+                <div class="carousel-caption d-flex flex-column align-items-start text-start start-0 ps-5 ms-4 bottom-5 mb-5 pb-2">
+                    <h1>Haltbarkeit Überwachung</h1>
+                    <p>Das System berechnet die Haltbarkeit dynamisch.</p>
+                </div>
+            </div>
+
+            <div class="carousel-item h-100 w-100">
+                <img th:src="@{/assets/images/app/soll_ist_bedarf.png}" class="d-block w-100 h-100 object-fit-cover" alt="Slide 4">
+                <div class="slider-overlay"></div>
+                <div class="carousel-caption d-flex flex-column align-items-start text-start start-0 ps-5 ms-4 bottom-5 mb-5 pb-2">
+                    <h1>Soll-Ist-Bedarf</h1>
+                    <p>Automatischer Versorgungsabgleich.</p>
+                </div>
+            </div>
+
+            <div class="carousel-item h-100 w-100">
+                <img th:src="@{/assets/images/app/create_new_product.png}" class="d-block w-100 h-100 object-fit-cover" alt="Slide 5">
+                <div class="slider-overlay"></div>
+                <div class="carousel-caption d-flex flex-column align-items-start text-start start-0 ps-5 ms-4 bottom-5 mb-5 pb-2">
+                    <h1>Neues Produkt hinzufügen</h1>
+                    <p>Hier können Sie ein neues Produkt hinzufügen.</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#fullScreenCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#fullScreenCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+</section>

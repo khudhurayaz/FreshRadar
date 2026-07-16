@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta th:name="${author}" th:content="${authorDescription}">
+    <title>Haftungsausschluss</title>
+    <link th:href="${cssPath}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="${appIcon}">
+    <link rel="stylesheet" th:href="@{/assets/style/master.css}">
+    <link rel="stylesheet" th:href="@{/assets/style/mobile.css}">
+
+    <!-- Externe styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="static-nav-page">
+<div th:replace="~{site/navigation::Menu(extraClass='navbar-scrolled')}"></div>
+
+<section class="footer-v1-section">
+    <div class="container">
+        <h2>Haftungsausschluss (Disclaimer)</h2>
+
+        <h3>1. Haftung für Inhalte</h3>
+        <p>Die Inhalte unserer Anwendung, insbesondere die Berechnungen des MHD-Radars und des Versorgungsabgleichs, werden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der bereitgestellten Informationen übernehmen wir jedoch keine Gewähr.</p>
+
+        <h3>2. Eigenverantwortung bei Lebensmitteln</h3>
+        <p>Die von FreshRadar bereitgestellten Informationen dienen lediglich der Unterstützung bei der Haushaltsorganisation. <strong>Die Entscheidung über die Genießbarkeit oder Verwendbarkeit von Lebensmitteln liegt ausschließlich beim Nutzer.</strong> Wir übernehmen keine Haftung für gesundheitliche Schäden, die durch den Verzehr von Lebensmitteln entstehen, deren Haltbarkeit durch das System berechnet oder bewertet wurde. Das Mindesthaltbarkeitsdatum (MHD) ist kein Verbrauchsdatum; eine sensorische Prüfung (Geruch, Geschmack, Aussehen) durch den Nutzer ist unerlässlich.</p>
+
+        <h3>3. Haftung für Links</h3>
+        <p>Unsere Anwendung kann Links zu externen Webseiten Dritter enthalten. Auf die Inhalte dieser Webseiten haben wir keinen Einfluss. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.</p>
+
+        <h3>4. Haftung für technische Störungen</h3>
+        <p>Wir übernehmen keine Haftung für Datenverluste oder technische Ausfälle, die durch Störungen der WebSockets-Verbindung, Ausfälle der MySQL-Datenbank oder sonstige technische Probleme innerhalb des Spring Boot Backends entstehen, sofern diese nicht auf vorsätzlichem oder grob fahrlässigem Verhalten unsererseits beruhen.</p>
+    </div>
+</section>
+
+<!-- Lade Kontakt section -->
+<div th:replace="~{/site/footer :: Footer}"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets/js/index.js}"></script>
+</body>
+</html>

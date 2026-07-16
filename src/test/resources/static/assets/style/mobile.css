@@ -1,0 +1,106 @@
+@media (max-width: 1300px) {
+    .carousel-caption {
+        width: 100% !important;
+        bottom: 2rem !important;
+        padding-left: 1.6rem !important;
+        padding-right: 1.6rem !important;
+        margin: 0 !important;
+        text-align: center;
+        /* Sorgt für exakt denselben Abstand links und rechts */
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+        
+        /* Verhindert, dass Padding die Breite des Elements sprengt */
+        box-sizing: border-box !important;
+    }
+
+    .carousel-caption h1 {
+        font-size: clamp(1.1rem, 4vw, 1.8rem) !important;
+        line-height: 1.1 !important;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    .carousel-caption p {
+        font-size: clamp(0.7rem, 2vw, 1.0rem) !important;
+        line-height: 1.3 !important;
+        margin-bottom: 1rem !important;
+        margin-right: 1rem !important;
+    }
+
+    .carousel-caption .btn {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: block !important;
+        width: fit-content !important;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .customNavbarCollapse.collapse:not(.show) {
+        display: none !important;
+    }
+    .customNavbarCollapse.show {
+        background-color: #EFEFEF !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem clamp(1rem, 3vw, 2.5rem);
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        padding-top: clamp(2rem, 3vw, 4rem);
+    }
+    .nav-btn-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+     .pricing-section .container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+    .col-feature { width: 45% !important; }
+    .col-plan { width: 27.5% !important; }
+
+    .feature-title {
+        font-size: 0.85rem !important;
+    }
+    
+    .feature-subtitle {
+        font-size: 0.7rem !important;
+    }
+
+    .custom-pricing-table td, 
+    .custom-pricing-table th {
+        padding: 0.8rem 0.4rem !important;
+    }
+
+    .table-btn-select, .table-btn-buy {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.75rem !important;
+    }
+
+    .table-check-img, .table-cross-img {
+        width: 18px !important;
+    }
+    
+    .table-rocket-img {
+        width: 22px !important;
+    }
+    
+    .custom-pricing-table th {
+        font-size: 0.9rem !important;
+    }
+}

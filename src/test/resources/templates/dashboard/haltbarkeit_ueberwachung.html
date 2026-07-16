@@ -1,0 +1,97 @@
+<section th:fragment="Haltbarkeit"
+         class="haltbarkeit"
+         id="filter-data"
+         th:data-cat="${selectedCategory}"
+         th:data-loc="${selectedLocation}"
+         th:data-page-size="${pageSize}"
+         th:data-current-page="0">
+
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
+        <h1 class="mb-0">Haltbarkeit Überwachung</h1>
+
+        <div class="d-flex flex-column flex-sm-row gap-2 gap-lg-3 w-100 w-lg-auto">
+            <div class="btn-group w-100 w-sm-auto" role="group">
+                <button type="button" class="btn btn-dark dropdown-toggle w-100" data-bs-toggle="dropdown">
+                    <span th:text="${!#strings.isEmpty(selectedCategoryLabel)} ? ${selectedCategoryLabel} : 'Kategorie auswählen'"></span>
+                </button>
+                <ul class="dropdown-menu filter-dropdown-menu">
+                    <li th:each="cat : ${allCategories}">
+                        <a th:href="@{/dashboard(tab='haltbarkeit',
+                                                 category=${cat.id},
+                                                 location=${selectedLocation},
+                                                 page=0,
+                                                 size=${productPage != null ? productPage.size : 10})}"
+                           th:classappend="${cat.id == selectedCategory} ? ' active' : ''"
+                           class="dropdown-item"
+                           th:text="${cat.name}">Kategoriename</a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a th:href="@{/dashboard(tab='haltbarkeit',
+                                                 category=null,
+                                                 location=${selectedLocation},
+                                                 page=0,
+                                                 size=${productPage != null ? productPage.size : 10})}"
+                           class="dropdown-item">Alle Kategorien</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="btn-group w-100 w-sm-auto" role="group">
+                <button type="button" class="btn btn-dark dropdown-toggle w-100" data-bs-toggle="dropdown">
+                    <span th:text="${!#strings.isEmpty(selectedLocationName)} ? ${selectedLocationName} : 'Lagerort auswählen'">Lagerort auswählen</span>
+                </button>
+                <ul class="dropdown-menu filter-dropdown-menu">
+                    <li th:each="loc : ${allLocations}">
+                        <a th:href="@{/dashboard(tab='haltbarkeit',
+                                                 category=${selectedCategory},
+                                                 location=${loc.locationId},
+                                                 page=0,
+                                                 size=${productPage != null ? productPage.size : 10})}"
+                           th:classappend="${loc.locationId == selectedLocation} ? ' active' : ''"
+                           class="dropdown-item"
+                           th:text="${loc.location}">Lagerort Name</a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a th:href="@{/dashboard(tab='haltbarkeit',
+                                                 category=${selectedCategory},
+                                                 location=null,
+                                                 page=0,
+                                                 size=${productPage != null ? productPage.size : 10})}"
+                           class="dropdown-item">Alle Orte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-3">Produkte</h2>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Produktname</th>
+                        <th scope="col">Einheit</th>
+                        <th scope="col">Geöffnet</th>
+                        <th scope="col">MHD</th>
+                        <th scope="col">Hinzugefügt Am</th>
+                        <th scope="col">Vorrat</th>
+                    </tr>
+                    </thead>
+                    <tbody id="product-body">
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">Produkte werden geladen ...</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="haltbarkeit-pagination" class="mt-4"></div>
+        </div>
+    </div>
+</section>

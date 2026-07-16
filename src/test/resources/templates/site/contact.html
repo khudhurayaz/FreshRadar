@@ -1,0 +1,57 @@
+<section class="contact-section" th:fragment="Contact">
+  <h1 data-animation="animate__fadeInDown" class="text-center">Kontakt <span>Aufnehmen</span></h1>
+  <p class="text-center mb-5" data-animation="animate__fadeInUp">Hast du Fragen oder Feedback? Schreib uns eine Nachricht!</p>
+
+  <div class="contactForm">
+    <form class="row g-3 mb-4" action="#" id="contactForm">
+      <div class="col-md-6" data-animation="animate__fadeInLeft">
+        <label for="inputFirstName" class="form-label" >Vorname</label>
+        <input
+                type="text"
+                name="firstName"
+                class="form-control"
+                id="inputFirstName"
+                placeholder="Gib deinen Vornamen ein...">
+      </div>
+      <div class="col-md-6" data-animation="animate__fadeInRight">
+        <label for="inputLastName" class="form-label">Nachname</label>
+        <input
+                type="text"
+                name="lastName"
+                class="form-control"
+                id="inputLastName"
+                placeholder="Gib deinen Nachnamen ein...">
+      </div>
+      <div class="col-12" data-animation="animate__fadeInDown">
+        <label for="inputEmail" class="form-label">E-Mail</label>
+        <input
+                type="email"
+                name="email"
+                class="form-control"
+                id="inputEmail"
+                placeholder="Gib deine E-Mail ein...">
+      </div>
+      <div class="col-12" data-animation="animate__fadeInUp">
+        <label for="inputSubject" class="form-label">Betreff</label>
+        <input
+                type="text"
+                name="subject"
+                class="form-control"
+                id="inputSubject"
+                placeholder="Wie können wir dir helfen?">
+      </div>
+      <div class="col-12" data-animation="animate__fadeInLeft">
+        <label for="inputMessage" class="form-label">Deine Nachricht</label>
+        <textarea
+                class="form-control"
+                name="message"
+                id="inputMessage"
+                rows="6"
+                placeholder="Schreibe hier deine Frage oder Anregung..."></textarea>
+      </div>
+      <div class="col-12 mt-3" data-animation="animate__fadeInRight">
+        <button type="submit" class="contactBtn w-100">Nachricht senden</button>
+      </div>
+    </form>
+  </div>
+</section>

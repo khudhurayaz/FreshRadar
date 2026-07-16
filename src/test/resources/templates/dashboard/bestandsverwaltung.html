@@ -1,0 +1,38 @@
+<section th:fragment="Bestandsverwaltung"
+         class="bestandsverwaltung"
+         id="bestandsverwaltung-section"
+         th:data-page-size="${pageSize}"
+         th:data-all-locations="${allLocations}"
+         th:data-allCategories="${allCategories}"
+         th:data-current-page="0">
+
+    <div class="mb-4">
+        <h1>Bestandsverwaltung</h1>
+    </div>
+
+    <div class="table-responsive showProducts">
+        <h3 class="card-title mb-4">Produkte</h3>
+
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Produkt</th>
+                <th scope="col">Ort / Kategorie</th>
+                <th scope="col">Status</th>
+                <th scope="col">Daten</th>
+                <th scope="col">Aktion</th>
+            </tr>
+            </thead>
+            <tbody id="bestandsverwaltung">
+            <tr>
+                <td colspan="7" class="text-center text-muted py-4">
+                    Produkte werden geladen ...
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="bestandsverwaltung-pagination" class="mt-4"></div>
+</section>

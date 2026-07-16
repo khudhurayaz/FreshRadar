@@ -1,0 +1,101 @@
+<div class="table-responsive showMessages" th:fragment="ShowMessages">
+    <h3 class="card-title mb-5">Nachrichten</h3>
+
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Vorname</th>
+            <th scope="col">Nachname</th>
+            <th scope="col">E-Mail</th>
+            <th scope="col">Betreff</th>
+            <th scope="col">Nachricht</th>
+            <th scope="col">Kontaktiert am</th>
+            <th scope="col">Aktion</th>
+        </tr>
+        </thead>
+
+        <tbody th:if="${contactPage != null and !contactPage.isEmpty()}">
+        <tr th:each="contact : ${contactPage.content}"
+            th:attr="data-contact-id=${contact.contactId}">
+            <td class="text-muted" th:text="${contact.contactId}"></td>
+            <td th:text="${contact.firstname ?: ''}"></td>
+            <td th:text="${contact.lastname ?: ''}"></td>
+            <td th:text="${contact.email ?: ''}"></td>
+            <td th:text="${contact.subject ?: ''}"></td>
+            <td th:text="${contact.message ?: ''}"></td>
+            <td th:text="${contact.contactDate ?: ''}"></td>
+            <td>
+                <div class="d-flex flex-wrap gap-2">
+                    <button type="button"
+                            class="btn btn-success btn-sm btn-answer-contact"
+                            th:attr="data-contact-id=${contact.contactId}" disabled>
+                        Antworten
+                    </button>
+                    <button type="button"
+                            class="btn btn-danger btn-sm btn-delete-contact"
+                            th:attr="data-contact-id=${contact.contactId},
+                                     data-contact-email=${contact.email}">
+                        Löschen
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+
+        <tbody th:if="${contactPage == null or contactPage.isEmpty()}">
+        <tr>
+            <td colspan="8" class="text-center text-muted py-4">
+                Es sind aktuell keine Nachrichten vorhanden.
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav class="my-3"
+         aria-label="Nachrichten Seiten"
+         th:if="${contactPage != null and contactPage.totalPages > 1}">
+        <ul class="pagination justify-content-center mb-0">
+
+            <li class="page-item" th:classappend="${contactPage.first} ? ' disabled'">
+                <a class="page-link"
+                   th:if="${!contactPage.first}"
+                   th:href="@{/admin(contactPage=${contactPage.number - 1},
+                                contactPageSize=${contactPage.size},
+                                profilePage=${profilePage.number},
+                                profilePageSize=${profilePage.size})}">
+                    Zurück
+                </a>
+                <span class="page-link" th:if="${contactPage.first}">Zurück</span>
+            </li>
+
+            <li class="page-item"
+                th:each="i : ${#numbers.sequence(0, contactPage.totalPages - 1)}"
+                th:classappend="${i == contactPage.number} ? ' active'">
+                <a class="page-link"
+                   th:if="${i != contactPage.number}"
+                   th:href="@{/admin(contactPage=${i},
+                                contactPageSize=${contactPage.size},
+                                profilePage=${profilePage.number},
+                                profilePageSize=${profilePage.size})}"
+                   th:text="${i + 1}"></a>
+                <span class="page-link"
+                      th:if="${i == contactPage.number}"
+                      th:text="${i + 1}"></span>
+            </li>
+
+            <li class="page-item" th:classappend="${contactPage.last} ? ' disabled'">
+                <a class="page-link"
+                   th:if="${!contactPage.last}"
+                   th:href="@{/admin(contactPage=${contactPage.number + 1},
+                                contactPageSize=${contactPage.size},
+                                profilePage=${profilePage.number},
+                                profilePageSize=${profilePage.size})}">
+                    Weiter
+                </a>
+                <span class="page-link" th:if="${contactPage.last}">Weiter</span>
+            </li>
+
+        </ul>
+    </nav>
+</div>

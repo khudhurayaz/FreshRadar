@@ -1,0 +1,40 @@
+<section th:fragment="SollIst"
+         class="sollIst"
+         id="soll-ist-section"
+         th:data-page-size="${pageSize}"
+         th:data-current-page="0">
+
+    <div class="mb-4">
+        <h1>Soll-Ist-Bedarf</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h2>Produkte</h2>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Produktname</th>
+                        <th scope="col">Soll</th>
+                        <th scope="col">Ist</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="sollIstBedarf">
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-4">
+                            Produkte werden geladen ...
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="soll-ist-pagination" class="mt-4"></div>
+        </div>
+    </div>
+</section>

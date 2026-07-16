@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta th:name="${author}" th:content="${authorDescription}">
+    <title>Datenschutzerklärung</title>
+    <link th:href="${cssPath}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" th:href="${appIcon}">
+    <link rel="stylesheet" th:href="@{/assets/style/master.css}">
+    <link rel="stylesheet" th:href="@{/assets/style/mobile.css}">
+
+    <!-- Externe styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="static-nav-page">
+<div th:replace="~{site/navigation::Menu(extraClass='navbar-scrolled')}"></div>
+
+<section class="footer-v1-section privacy-policy-section">
+    <div class="container">
+        <h1>Datenschutzerklärung</h1>
+
+        <p>Stand: Juli 2026</p>
+
+        <h2>1. Einleitung und Verantwortlicher</h2>
+        <p>Wir freuen uns über dein Interesse an FreshRadar. Der Schutz deiner Privatsphäre ist für uns von höchster Bedeutung. Nachfolgend informieren wir dich über den Umgang mit deinen Daten gemäß der Datenschutz-Grundverordnung (DSGVO).</p>
+        <p>Verantwortlicher: Ayaz Khudhur, Landsberger Straße 39, 32049, ayaz_essmat_khudhur.khudhur@hsbi.de.</p>
+
+        <h2>2. Art der erhobenen Daten</h2>
+        <p>Wir verarbeiten personenbezogene Daten, die für den Betrieb der Anwendung erforderlich sind:</p>
+        <ul>
+            <li><strong>Registrierungsdaten:</strong> E-Mail-Adresse, Benutzername, Passwort (verschlüsselt gespeichert).</li>
+            <li><strong>Anwendungsdaten:</strong> Bestandslisten, Lagerorte, MHD-Angaben und individuelle Einstellungen im "Mecker-Dashboard".</li>
+            <li><strong>Technische Nutzungsdaten:</strong> IP-Adresse, Browser-Typ, Zeitstempel des Zugriffs sowie WebSocket-Verbindungsdaten zur Echtzeit-Synchronisation.</li>
+        </ul>
+
+        <h2>3. Zweck der Datenverarbeitung</h2>
+        <p>Die Verarbeitung erfolgt auf Basis von Art. 6 Abs. 1 DSGVO zur Erfüllung des Nutzungsvertrages:</p>
+        <ul>
+            <li>Bereitstellung des Bestandsmanagements und der Haltbarkeitsüberwachung.</li>
+            <li>Ermöglichung des automatischen Versorgungsabgleichs.</li>
+            <li>Sicherstellung der technischen Stabilität durch WebSockets und Server-Logs.</li>
+        </ul>
+
+        <h2>4. Technische Infrastruktur und Datensicherheit</h2>
+        <p>Die Anwendung basiert auf einem <strong>Java Spring Boot Backend</strong> mit einer <strong>MySQL-Datenbank</strong>. Zum Schutz deiner Daten setzen wir folgende Sicherheitsmaßnahmen ein:</p>
+        <ul>
+            <li><strong>Verschlüsselung:</strong> Die Übertragung erfolgt durchgehend via HTTPS (TLS).</li>
+            <li><strong>Datenbankschutz:</strong> Zugriff erfolgt ausschließlich über gesicherte JDBC-Verbindungen.</li>
+            <li><strong>Datenminimierung:</strong> Es werden nur die Daten gespeichert, die für die Logik der Anwendung (MHD-Radar, Soll-Ist-Abgleich) zwingend notwendig sind.</li>
+        </ul>
+
+        <h2>5. Weitergabe von Daten</h2>
+        <p>Eine Weitergabe deiner Daten an Dritte erfolgt nicht, es sei denn, wir sind gesetzlich dazu verpflichtet oder es dient der Erbringung technischer Wartungsaufgaben (Hosting-Provider). Die Serverstandorte befinden sich in Deutschland.</p>
+
+        <h2>6. Dauer der Speicherung</h2>
+        <p>Deine Daten werden gelöscht oder gesperrt, sobald der Zweck der Speicherung entfällt (z.B. nach Löschung deines Accounts), sofern keine gesetzlichen Aufbewahrungsfristen (z.B. bei kostenpflichtigen Abomodellen) entgegenstehen.</p>
+
+        <h2>7. Betroffenenrechte</h2>
+        <p>Du hast gemäß DSGVO folgende Rechte:</p>
+        <ul>
+            <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
+            <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
+            <li>Recht auf Löschung („Recht auf Vergessenwerden“, Art. 17 DSGVO)</li>
+            <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+            <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
+        </ul>
+
+        <h2>8. Kontakt</h2>
+        <p>Für Anfragen zum Datenschutz wende dich bitte an <a class="fw-bold" href="/#contact">Kontakt</a>. Falls du der Ansicht bist, dass die Verarbeitung deiner Daten gegen Datenschutzrecht verstößt, hast du das Recht, dich bei einer Aufsichtsbehörde zu beschweren.</p>
+    </div>
+</section>
+
+<!-- Lade Kontakt section -->
+<div th:replace="~{/site/footer :: Footer}"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets/js/index.js}"></script>
+</body>
+</html>

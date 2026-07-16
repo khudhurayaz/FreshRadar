@@ -1,0 +1,7 @@
+target/
+.idea/
+.git/
+uploads/
+.env
+.envRemote
+*.iml

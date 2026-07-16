@@ -12,7 +12,7 @@ RUN ./mvnw dependency:go-offline
 
 COPY src src
 
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw clean package -DskipTests -Dproject.build.sourceEncoding=windows-1252 -Dproject.resources.sourceEncoding=windows-1252
 
 FROM eclipse-temurin:17-jre
 

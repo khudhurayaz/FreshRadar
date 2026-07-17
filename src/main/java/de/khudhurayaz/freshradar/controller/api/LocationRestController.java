@@ -21,11 +21,20 @@ import java.util.Optional;
 public class LocationRestController {
     private LocationService locationService;
 
+    /**
+     * @return Eine Liste von allen Lagerorte wird zurückgeliefert.
+     */
     @GetMapping("/get")
     public List<LocationRequest> showLocations() {
         return locationService.getLocations();
     }
 
+    /**
+     * Ein neuer Lagerort hinzufügen.
+     * @param request Der CreateLocationRequest hat nur zwei variablen, welches einmal der Name der Lager ist und der Zeitstempel.
+     * @return Als Rückgabewert bekommt der Anwender einen String, in der es drin steht, welches Problem es sich gab oder das Lagerort
+     *          Erfolgreich hinzugefügt wurde.
+     */
     @PutMapping("/add")
     public ResponseEntity<String> addInventory(
             @RequestBody CreateLocationRequest request) {
@@ -40,11 +49,22 @@ public class LocationRestController {
         }
     }
 
+    /**
+     * Mit dieser Endpunkt kann ein Lagerort aktualisiert werden.
+     * @param request Der Klasse CreateLocationRequest wird erwartet.
+     * @param id Lagerort ID wird als Parameter übergeben.
+     * @return Als Rückgabewert wird zwei Nachrichten ausgaben.
+     */
     @PutMapping("/update/{id}")
     public String updateLocation(@RequestBody CreateLocationRequest request, @PathVariable String id) {
         return locationService.save(request, Integer.parseInt(id)) ? "Location konnte nicht aktualisiert werden!" :  "Location wurde erfolgreich aktualisiert!";
     }
 
+    /**
+     * Mit dieser Endpunkt kann ein Lagerort wieder gelöscht werden.
+     * @param id Lagerort ID wird lediglich benötigt.
+     * @return Ein ResponseEntity, ob es erfolgreich oder nicht war.
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteLocation(@PathVariable String id){
         if (locationService.delete(Integer.parseInt(id))){
@@ -56,6 +76,11 @@ public class LocationRestController {
         );
     }
 
+    /**
+     * Durch dieser Endpunkt kann ein Lagerort mit der jeweiligen ID geholt werden.
+     * @param id Lagerort ID wird benötigt.
+     * @return Rückgabewert ein ResponseEntity von Type LocationRequest zurückgeliefert.
+     */
     @GetMapping("/get/{id}")
     public ResponseEntity<LocationRequest> getLocationById(
             @PathVariable Integer id){

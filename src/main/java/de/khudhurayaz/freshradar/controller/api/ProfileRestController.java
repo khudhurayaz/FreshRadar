@@ -34,6 +34,18 @@ public class ProfileRestController {
     @Value("${app.upload.dir:./uploads/profile/}")
     private String uploadDir;
 
+    /**
+     * Mit dieser Endpunkt kann man die Benutzerdaten ändern.
+     * @param principal Aktuell angemeldete Benutzer.
+     * @param firstname Benutzer Vorname
+     * @param lastname Benutzer Nachname
+     * @param area Benutzer Beruf
+     * @param info Benutzer information
+     * @param location Benutzer Wohnort
+     * @param existingProfileImage Benutzer existierte Profilbild
+     * @param logoFile Benutzer Profilbild pfad
+     * @return Ein String wie die stand ist.
+     */
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> editProfile(
             Principal principal,

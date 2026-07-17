@@ -39,6 +39,13 @@ public class ProductRestController {
         this.locationService = locationService;
     }
 
+    /**
+     * Mit dieser Endpunkt kann Produkte durch eine Kategorie und ein Lagerort gezeigt werden.
+     * @param principal Benutzerdaten.
+     * @param category Kategorie id.
+     * @param location Lagerort id.
+     * @return Eine Liste an Produkten werden zurückgeliefert, falls es gibt ansonsten eine Leere liste.
+     */
     @GetMapping("/showProductsWithCategoryAndLocation")
     public ResponseEntity<List<ProductRequest>> getProdukte(
             Principal principal,
@@ -53,6 +60,11 @@ public class ProductRestController {
                 .orElse(ResponseEntity.status(401).build());
     }
 
+    /**
+     * Alle Produkte von jeweiligen Benutzer werden angezeigt.
+     * @param principal Benutzerdaten.
+     * @return Eine Liste an Produkten werden zurückgeliefert, falls es gibt ansonsten eine Leere liste.
+     */
     @GetMapping("/all")
     public ResponseEntity<List<ProductRequest>> getAllProducts(Principal principal) {
         Optional<User> user = userService.findByEmail(principal.getName());
@@ -60,6 +72,12 @@ public class ProductRestController {
         return ResponseEntity.ok(dtos);
     }
 
+    /**
+     * Mit dieser Endpunkt kann ein Produkt aktualisiert werden.
+     * @param id Produkt id wird benötigt.
+     * @param updatedData Aktualisiertes Produkt muss übergeben werden.
+     * @return Fehler als ResponseEntity von type String oder 200 OK / 500 INTERNAL_SERVER_ERROR.
+     */
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateProduct(
             @PathVariable int id,
@@ -88,9 +106,8 @@ public class ProductRestController {
                 isOpenDate = today.plusDays(4);
             }
         }
-        log.debug("Gib Ort aus {}", locName);
+
         if (cat != null) {
-            log.debug("ich bin in if abfrage");
             boolean isSpecialStorage = locName.equals("GEFRIERFACH") || cat.isStorageForbidden(locName);
             log.debug("isSpecialStorage {}", isSpecialStorage);
             if (Boolean.TRUE.equals(updatedData.getIsOpen()) || isSpecialStorage) {
@@ -112,6 +129,12 @@ public class ProductRestController {
         return saved ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
+    /**
+     * Mit dieser Endpunkt kann ein Produkt gelöscht werden.
+     * @param id Produkt id wird benötigt.
+     * @return Entweder alles war in ordnung und 200 wird zurückgeliefert oder es gab probleme und notFound 404, z.B.
+     *         das Produkt wurde nicht gefunden, weil produkt id nicht gestimmt hat.
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteProduct(
             @PathVariable int id
@@ -124,6 +147,12 @@ public class ProductRestController {
         }
     }
 
+    /**
+     * Durch dieser Endpunkt kann ein Produkt neu hinzugefügt werden.
+     * @param principal Benutzerdaten wird benötigt.
+     * @param createProduct Den Parameter ProductRequest wird erwartet, hier ist die Struktur des Produkts aufgebaut.
+     * @return Benachrichtigung je nachdem, wird zurückgeliefert: Beispiel Limit von 10 Produkten erreicht!
+     */
     @PostMapping("/create")
     public ResponseEntity<String> createProduct(
             Principal principal,
@@ -191,6 +220,11 @@ public class ProductRestController {
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ein Fehler ist aufgetreten!");
     }
 
+    /**
+     * Alle abgelaufene Produkte werden zurückgeliefert.
+     * @param principal Benutzerdaten werden benötigt.
+     * @return Als Rückgabewert wird ein Long zurückgeliefert, wie viele Produkte abgelaufen sind!
+     */
     @GetMapping("/expiring")
     public ResponseEntity<Long> getExpiringCount( Principal principal) {
         Optional<User> user = userService.findByEmail(principal.getName());
@@ -198,6 +232,11 @@ public class ProductRestController {
         return ResponseEntity.ok((long) expiring.size());
     }
 
+    /**
+     * Der Standardfall prüft ob der MHD noch gültig ist!
+     * @param principal Benutzerdaten werden benötigt, um nur Benutzerprodukte zu filtern.
+     * @return Eine Liste an ProductRequest.
+     */
     @GetMapping("/expiring/expiringProducts")
     public ResponseEntity<List<ProductRequest>> getExpiringStandardfall(Principal principal) {
         Optional<User> user = userService.findByEmail(principal.getName());
@@ -205,6 +244,11 @@ public class ProductRestController {
         return ResponseEntity.ok().body(expiring);
     }
 
+    /**
+     * Mit dieser Endpunkt wird geprüft ob, der Limit für Basic Benutzer erreicht wurde oder nicht.
+     * @param principal Benutzerdaten werden benötigt, weil die jeweiligen Produkte die Benutzer gehören zusammengezählt!
+     * @return Wahr => Limit wurde erreicht keine weitere Produkthinzufügung möglich. Falsch => Weitere Produkte können hinzugefügt werden.
+     */
     @GetMapping("/limit")
     public boolean limit(Principal principal) {
         Optional<User> user = userService.findByEmail(principal.getName());
@@ -212,6 +256,15 @@ public class ProductRestController {
         return productRequests.get().size() == LIMIT;
     }
 
+    /**
+     * Mit dieser Endpunkt können alle Produkte zurückgegeben werden.
+     * @param principal Benutzerdaten für die Produkte.
+     * @param category KategorieID
+     * @param location LagerortID
+     * @param page Welche Seite ist es gerade sichtbar
+     * @param size Wie viel Produkte sollen gezeigt werden?
+     * @return Der Interface page mit Produkten wird zurückgeliefert.
+     */
     @GetMapping("/products")
     public ResponseEntity<Page<ProductRequest>> getProductsPaged(
             Principal principal,
@@ -242,6 +295,11 @@ public class ProductRestController {
         return ResponseEntity.ok(productPage);
     }
 
+    /**
+     * Mit dieser Endpunkt kann mit einer ProduktId ein Produkt gefunden werden.
+     * @param id ProduktID für das Produkt das es gesucht wird.
+     * @return ProductRequest wird zurückgeliefert.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ProductRequest> getProduct(@PathVariable Integer id) {
         Optional<ProductRequest> request = productService.getProduct(id);

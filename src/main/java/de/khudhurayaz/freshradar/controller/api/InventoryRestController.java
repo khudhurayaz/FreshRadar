@@ -89,6 +89,12 @@ public class InventoryRestController {
         );
     }
 
+    /**
+     * Mit dieser Endpunkt wird ein Inventar durch ProduktID gesucht und zurückgeliefert als InventoryRequest.
+     * @param productId ProduktID wird benötigt damit das richtige Inventar Spalte gezeigt werden kann.
+     * @param principal Für das richtige ergebnis wird auch der Benutzerdaten gebraucht.
+     * @return Die Klasse InventoryRequest wird zurückgeliefert, welches soll und ist variablen beinhaltet.
+     */
     @GetMapping("/inventory/{productId}")
     public ResponseEntity<InventoryRequest> getInventory(
             @PathVariable int productId,
@@ -102,6 +108,11 @@ public class InventoryRestController {
         return inventoryRequest.map(request -> new ResponseEntity<>(request, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /**
+     * Durch dieser Endpunkt kann geprüft werden ob, der inventar nicht unter 20% liegt.
+     * @param principal Der jeweilige Benutzer wird benötigt, um die richtigen Einträge zu durchsuchen.
+     * @return Als Rückgabewert wird ein String zurückgeliefert mit einer Benachrichtigung.
+     */
     @GetMapping("/inventory/healthCareCheckup")
     public ResponseEntity<String> healthCareCheckup(Principal principal) {
         Optional<User> user = userService.findByEmail(principal.getName());

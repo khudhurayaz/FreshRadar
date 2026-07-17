@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>4.0.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
+
 	<groupId>de.khudhur</groupId>
 	<artifactId>FreshRadar</artifactId>
 	<version>0.0.1</version>
 	<name>Ayaz Khudhur</name>
+
 	<description>
 		FreshRadar ist ein vorausschauendes Kontrollzentrum. Der Kern ist: mehr Daten rein, weniger Verschwendung raus.
 		Die Webanwendung weiß zu jedem Zeitpunkt, wie viel von welchem Lebensmittel wo lagert und wann es ungenießbar wird.
 	</description>
+
 	<url/>
+
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
@@ -24,6 +30,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+
 	<developers>
 		<developer>
 			<id>akhudhur</id>
@@ -36,37 +43,32 @@
 			<timezone>Europe/Berlin</timezone>
 		</developer>
 	</developers>
+
 	<scm>
 		<connection>scm:git:git://github.com/khudhurayaz/FreshRadar.git</connection>
 		<developerConnection>scm:git:ssh://github.com/khudhurayaz/FreshRadar.git</developerConnection>
 		<tag>HEAD</tag>
 		<url>https://github.com/khudhurayaz/FreshRadar</url>
 	</scm>
+
 	<properties>
 		<java.version>17</java.version>
+		<lombok.version>1.18.46</lombok.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
 	<dependencies>
-		<!-- Spring Framework ist, ein weit verbreitetes Java-Framework für die
-            Entwicklung von Unternehmensanwendungen -->
-		<!-- Spring Boot Starter Data JPA ist ein Spring-Boot‑Starter,
-            der das Einrichten von JPA-basiertem Datenzugriff vereinfacht.
-            Kurz gesagt: CRUD-Operationen, CRUD = Create, Read, Update and Delete
-            Das sind Operationen in SQL für Tabellen erstellungen, Zeilen anpassungen usw.-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!-- spring-boot-starter-security ist ein Spring Boot Starter,
-            der die Integration von Spring Security in eine Spring‑Boot‑Anwendung stark vereinfacht.
-            Per Default: Alle HTTP-Endpunkte werden geschützt und erfordert eine Authentifizierung -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<!-- spring-boot-starter-thymeleaf integriert Thymeleaf in eine Spring‑Boot‑Anwendung
-            und macht Template‑Rendering für serverseitig gerenderte HTML‑Seiten einfach.  -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -76,33 +78,32 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- thymeleaf-extras-springsecurity6 ist eine Erweiterung,
-            die Thymeleaf‑Templates mit Spring Security 6 verbindet und
-            zusätzliche Dialekte/Attribute bereitstellt,
-            um Sicherheitsentscheidungen direkt in Templates zu treffen. -->
+
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
 		</dependency>
-		<!-- Für Automatische Getter, Setter und Konstruktor -->
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.46</version>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
-		<!-- Für Entwickler, hat viele features wie automatischer Neustart der Anwendung, LiveReload etc.. -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<!-- Relationales Datenbankverwaltungssystem (RDBMS) -->
+
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>dotenv-java</artifactId>
@@ -114,21 +115,25 @@
 			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
@@ -141,7 +146,6 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -151,11 +155,8 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
+
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -165,7 +166,27 @@
 					<propertiesEncoding>UTF-8</propertiesEncoding>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.14.1</version>
+				<configuration>
+					<release>${java.version}</release>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>

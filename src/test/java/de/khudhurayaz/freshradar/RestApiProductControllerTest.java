@@ -53,48 +53,30 @@ class RestApiProductControllerTest {
 
     @Test
     @WithMockUser(username = "test@example.com")
-    void getAllProducts_returnsProductsForLoggedInUser() throws Exception {
+    void getAllProducts_redirectsToSubscribe_whenUserHasNoSubscription() throws Exception {
         User user = new User();
         user.setId(1);
-
-        ProductRequest product = new ProductRequest();
-        product.setId(10);
-        product.setName("Milch");
 
         when(userService.findByEmail("test@example.com"))
                 .thenReturn(Optional.of(user));
 
-        when(productService.getAll(1))
-                .thenReturn(List.of(product));
-
         mockMvc.perform(get("/api/product/all"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(10))
-                .andExpect(jsonPath("$[0].name").value("Milch"));
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test
     @WithMockUser(username = "test@example.com")
-    void getFilteredProducts_returnsFilteredList() throws Exception {
+    void getFilteredProducts_redirectsToSubscribe_whenUserHasNoSubscription() throws Exception {
         User user = new User();
         user.setId(1);
-
-        ProductRequest product = new ProductRequest();
-        product.setId(5);
-        product.setName("Joghurt");
 
         when(userService.findByEmail("test@example.com"))
                 .thenReturn(Optional.of(user));
 
-        when(productService.getFilteredProductsAsDto(2, 3, 1))
-                .thenReturn(List.of(product));
-
         mockMvc.perform(get("/api/product/showProductsWithCategoryAndLocation")
                         .param("category", "2")
                         .param("location", "3"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(5))
-                .andExpect(jsonPath("$[0].name").value("Joghurt"));
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test

@@ -46,14 +46,17 @@ public class InventoryRestController {
      * @return Rückgabewert ist ein String
      */
     @PutMapping("/addInventory")
-    public ResponseEntity<String> addInventory(
-            @RequestBody CreateInventoryRequest inventoryRequest) {
+    public ResponseEntity<String> addInventory(@RequestBody CreateInventoryRequest inventoryRequest) {
         log.debug("Adding inventory to database");
 
         CreateInventoryRequest request = inventoryService.addInventory(inventoryRequest);
-        log.debug("Adding inventory[{}]", request.toString());
-        return request != null ? ResponseEntity.ok().body("Inventar wurde erfolgreich hinzugefügt.") :
-                                 ResponseEntity.badRequest().body("Es konnte kein neues Inventar hinzugefügt werden.");
+
+        if (request == null) {
+            return ResponseEntity.badRequest().body("Es konnte kein neues Inventar hinzugefügt werden.");
+        }
+
+        log.debug("Adding inventory[{}]", request);
+        return ResponseEntity.ok().body("Inventar wurde erfolgreich hinzugefügt.");
     }
 
     /**

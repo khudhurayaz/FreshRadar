@@ -119,16 +119,14 @@ class InventoryRestControllerTest {
         mockMvc.perform(put("/api/addInventory")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {
-                                  "productId": 5,
-                                  "quantity": 20,
-                                  "currentQuantity": 20
-                                }
-                                """))
+                            {
+                              "productId": 5,
+                              "quantity": 20,
+                              "currentQuantity": 20
+                            }
+                            """))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string(
-                        "Es konnte kein neues Inventar hinzugefügt werden."
-                ));
+                .andExpect(content().string("Es konnte kein neues Inventar hinzugefügt werden."));
 
         verify(inventoryService).addInventory(any(CreateInventoryRequest.class));
     }
@@ -150,9 +148,7 @@ class InventoryRestControllerTest {
 
         mockMvc.perform(delete("/api/deleteInventory/999"))
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(
-                        "Inventory konnte nicht gelöscht werden!"
-                ));
+                .andExpect(content().string("Inventory konnte nicht gelöscht werden!"));
 
         verify(inventoryService).delete(999);
     }
@@ -172,9 +168,7 @@ class InventoryRestControllerTest {
                                 }
                                 """))
                 .andExpect(status().isOk())
-                .andExpect(content().string(
-                        "Inventar wurde erfolgreich aktualisiert!"
-                ));
+                .andExpect(content().string("Inventar wurde erfolgreich aktualisiert!"));
 
         verify(inventoryService).save(any(UpdateInventoryRequest.class));
     }
@@ -194,9 +188,7 @@ class InventoryRestControllerTest {
                                 }
                                 """))
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(
-                        "Inventar konnte nicht aktualisiert werden!"
-                ));
+                .andExpect(content().string("Inventar konnte nicht aktualisiert werden!"));
 
         verify(inventoryService).save(any(UpdateInventoryRequest.class));
     }
@@ -261,9 +253,7 @@ class InventoryRestControllerTest {
         mockMvc.perform(get("/api/inventory/healthCareCheckup")
                         .principal(() -> "test@example.com"))
                 .andExpect(status().isUnauthorized())
-                .andExpect(content().string(
-                        "[Inventar] Benutzer nicht gefunden!"
-                ));
+                .andExpect(content().string("[Inventar] Benutzer nicht gefunden!"));
 
         verify(userService).findByEmail("test@example.com");
     }
@@ -281,9 +271,7 @@ class InventoryRestControllerTest {
         mockMvc.perform(get("/api/inventory/healthCareCheckup")
                         .principal(() -> "test@example.com"))
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(
-                        "[Inventar] Keine Einträge wurden gefunden!"
-                ));
+                .andExpect(content().string("[Inventar] Keine Einträge wurden gefunden!"));
 
         verify(userService).findByEmail("test@example.com");
         verify(inventoryService).findAll(1);
@@ -308,9 +296,7 @@ class InventoryRestControllerTest {
         mockMvc.perform(get("/api/inventory/healthCareCheckup")
                         .principal(() -> "test@example.com"))
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(
-                        "[Inventar] Unterversorgt! Bitte nachkaufen!"
-                ));
+                .andExpect(content().string("[Inventar] Unterversorgt! Bitte nachkaufen!"));
 
         verify(userService).findByEmail("test@example.com");
         verify(inventoryService).findAll(1);
@@ -335,9 +321,7 @@ class InventoryRestControllerTest {
         mockMvc.perform(get("/api/inventory/healthCareCheckup")
                         .principal(() -> "test@example.com"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(
-                        "[Inventar] Bestens versorgt! Der Vorrat ist ausreichend."
-                ));
+                .andExpect(content().string("[Inventar] Bestens versorgt! Der Vorrat ist ausreichend."));
 
         verify(userService).findByEmail("test@example.com");
         verify(inventoryService).findAll(1);
